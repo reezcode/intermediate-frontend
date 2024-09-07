@@ -1,0 +1,29 @@
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 32px;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.notes-list-container {
+  margin-top: 20px;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .list {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+@media (max-width: 576px) {
+  .list {
+    grid-template-columns: 1fr;
+  }
+}
