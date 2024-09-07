@@ -1,7 +1,7 @@
 class NoteForm extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: "open" });
   }
   connectedCallback() {
     this.render();
@@ -87,33 +87,31 @@ class NoteForm extends HTMLElement {
   }
 
   setUpEventListeners() {
-    const form = this.shadowRoot.querySelector('#noteForm');
-    const titleInput = this.shadowRoot.querySelector('#noteTitle');
-    const bodyInput = this.shadowRoot.querySelector('#noteBody');
-    const submitButton = this.shadowRoot.querySelector('.btn-submit');
+    const form = this.shadowRoot.querySelector("#noteForm");
+    const titleInput = this.shadowRoot.querySelector("#noteTitle");
+    const bodyInput = this.shadowRoot.querySelector("#noteBody");
+    const submitButton = this.shadowRoot.querySelector(".btn-submit");
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener("submit", (event) => {
       event.preventDefault();
       const isValid = this.validateForm();
       if (isValid) {
         const note = {
           title: titleInput.value,
           body: bodyInput.value,
-          createdAt: new Date().toISOString(),
-          archived: false,
         };
-        this.dispatchEvent(new CustomEvent('note-added', { detail: note }));
+        this.dispatchEvent(new CustomEvent("note-added", { detail: note }));
         form.reset();
       }
     });
 
-    titleInput.addEventListener('input', () => this.validateInput(titleInput));
-    bodyInput.addEventListener('input', () => this.validateInput(bodyInput));
+    titleInput.addEventListener("input", () => this.validateInput(titleInput));
+    bodyInput.addEventListener("input", () => this.validateInput(bodyInput));
   }
 
   validateForm() {
-    const titleInput = this.shadowRoot.querySelector('#noteTitle');
-    const bodyInput = this.shadowRoot.querySelector('#noteBody');
+    const titleInput = this.shadowRoot.querySelector("#noteTitle");
+    const bodyInput = this.shadowRoot.querySelector("#noteBody");
 
     const isTitleValid = this.validateInput(titleInput);
     const isBodyValid = this.validateInput(bodyInput);
@@ -124,15 +122,15 @@ class NoteForm extends HTMLElement {
   validateInput(input) {
     const errorMessage = input.nextElementSibling;
     if (!input.value.trim()) {
-      input.classList.add('invalid');
-      errorMessage.style.display = 'block';
+      input.classList.add("invalid");
+      errorMessage.style.display = "block";
       return false;
     } else {
-      input.classList.remove('invalid');
-      errorMessage.style.display = 'none';
+      input.classList.remove("invalid");
+      errorMessage.style.display = "none";
       return true;
     }
   }
 }
 
-customElements.define('note-form', NoteForm);
+customElements.define("note-form", NoteForm);
